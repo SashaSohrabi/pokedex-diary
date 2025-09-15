@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Pokedex Diary — Home</title>
+    <title>Pokedex Diary — Pokédex</title>
     <link rel="icon" href="/vite.svg" />
     <link rel="stylesheet" href="src/styles/main.css" />
-    <script type="module" src="/src/pages/main.js"></script>
+    <script type="module" src="/src/pages/pokedex.js"></script>
   </head>
   <body class="min-h-screen bg-slate-50 text-slate-900">
     <header id="app-navbar" class="sticky top-0 z-10 bg-white/90 backdrop-blur border-b">
@@ -14,18 +14,19 @@
         <a href="/" class="font-semibold tracking-tight">Pokedex Diary</a>
         <nav class="space-x-4 text-sm">
           <a href="/" class="text-slate-600 hover:text-slate-900">Home</a>
-          <a href="/pokedex.html" class="text-slate-600 hover:text-slate-900">Pokédex</a>
+          <a href="/pokedex.html" class="text-slate-900 font-medium">Pokédex</a>
         </nav>
       </div>
     </header>
     <main id="app-root" class="max-w-6xl mx-auto p-4">
       <section class="rounded-lg border bg-white p-6">
-        <h1 class="text-xl font-semibold mb-2">Welcome</h1>
-        <p class="text-slate-600">Placeholder content. The app will render here.</p>
+        <h1 class="text-xl font-semibold mb-2">Your Pokédex</h1>
+        <p class="text-slate-600">No Pokémon yet. Caught ones will appear here.</p>
       </section>
     </main>
     <noscript>
       <div class="max-w-6xl mx-auto p-4 text-red-700">This app requires JavaScript to run.</div>
     </noscript>
   </body>
+  
 </html>
