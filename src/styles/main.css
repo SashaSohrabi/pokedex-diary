@@ -1,0 +1,6 @@
+@import 'tailwindcss';
+
+h1 {
+  color: hotpink;
+  font-family: cursive;
+}
