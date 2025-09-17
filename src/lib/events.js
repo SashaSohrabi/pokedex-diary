@@ -1,4 +1,4 @@
-import { saveToLocalStorage, getFromLocalStorage, POKEMONS_CACHE_KEY, CAUGHT_KEY } from './';
+import { saveToLocalStorage, getFromLocalStorage, POKEMONS_CACHE_KEY, CAUGHT_KEY, FAVORITES_KEY } from './';
 import Toastify from 'toastify-js';
 
 // Handlers for delegated actions
@@ -28,7 +28,29 @@ const onCatch = (id, card) => {
 };
 
 const onFavorite = (id, card) => {
-  console.log('favorite', { id, card });
+  const favorites = getFromLocalStorage(FAVORITES_KEY);
+  const isFav = favorites.some((f) => f && f.id === id);
+
+  const all = getFromLocalStorage(POKEMONS_CACHE_KEY);
+  const item = all.find((p) => p && p.id === id);
+  if (!item && !isFav) return; // nothing to add
+
+  // Toggle favorites
+  const next = isFav
+    ? favorites.filter((f) => f && f.id !== id)
+    : [...favorites, item].filter(Boolean);
+
+  saveToLocalStorage(FAVORITES_KEY, next);
+
+  // Update the heart UI
+  const heart = card.querySelector('[data-action="favorite"]');
+  if (heart) {
+    const nowFav = !isFav;
+    heart.setAttribute('aria-pressed', String(nowFav));
+    // heart.classList.toggle('text-rose-600', nowFav);
+    // heart.classList.toggle('text-rose-300', !nowFav);
+    heart.textContent = nowFav ? '❤️' : '🤍';
+  }
 };
 
 export function attachRootEvents(root) {
