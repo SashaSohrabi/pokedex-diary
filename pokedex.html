@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Pokedex Diary — Pokédex</title>
-    <link rel="icon" href="/public/pokemon.svg" />
+    <link rel="icon" href="/pokemon.svg" />
     <link rel="stylesheet" href="src/styles/main.css" />
     <script type="module" src="/src/pages/pokedex.js"></script>
   </head>
@@ -39,9 +39,25 @@
       </div>
     </header>
     <main id="app-root" class="max-w-6xl mx-auto p-4">
-      <section class="rounded-lg border bg-white p-6">
-        <h1 class="text-xl font-semibold mb-2">Your Pokédex</h1>
-        <p class="text-slate-600">No Pokémon yet. Caught ones will appear here.</p>
+      <!-- Header Section -->
+      <section class="text-center mb-8">
+        <h1
+          class="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4"
+        >
+          Your Pokédx
+        </h1>
+        <p class="text-lg text-slate-600 mb-6">No Pokémon yet. Caught ones will appear here.</p>
+      </section>
+
+      <!-- Pokédx Display Area -->
+      <section class="bg-white rounded-xl p-6 shadow-lg">
+        <h2 class="text-xl font-semibold mb-4">Pokédx Collection</h2>
+        <div
+          id="pokemon-display-area"
+          class="min-h-[200px] flex items-center justify-center text-slate-500"
+        >
+          <p>Your Pokédx collection will be displayed here</p>
+        </div>
       </section>
     </main>
     <noscript>
