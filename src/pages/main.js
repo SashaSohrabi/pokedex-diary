@@ -6,6 +6,8 @@ import {
   attachRootEvents,
   saveToLocalStorage,
   POKEMONS_CACHE_KEY,
+  getFromLocalStorage,
+  FAVORITES_KEY,
 } from '../lib';
 import PokemonCard from '../components/PokemonCard.js';
 
@@ -24,6 +26,10 @@ attachRootEvents(root);
 const cardsData = pokemons.map(toCardData);
 saveToLocalStorage(POKEMONS_CACHE_KEY, cardsData);
 
-// Render cards into the container
-const cards = cardsData.map((p) => PokemonCard(p, { ...cardOptions }));
+// Render cards into the container with favorite state
+const favorites = getFromLocalStorage(FAVORITES_KEY);
+const favSet = new Set(favorites.map((f) => f?.id));
+const cards = cardsData.map((p) =>
+  PokemonCard(p, { ...cardOptions, favorite: favSet.has(p.id) })
+);
 cards.forEach((card) => renderUI('#pokedex-container', card, { multiple }));
