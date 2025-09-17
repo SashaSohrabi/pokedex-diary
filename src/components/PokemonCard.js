@@ -7,7 +7,7 @@ const PokemonCard = (
     <h3 class="capitalize font-semibold mb-1">${p.name}</h3>
     ${p.types?.length ? `<p class="text-sm text-gray-600 mb-2">Types: ${p.types.join(', ')}</p>` : ''}
     <div class="flex gap-2 flex-wrap">
-      ${catchBtn ? `<button data-action="catch" class="px-3 py-1 rounded bg-emerald-600 text-white">Catch</button>` : ''}
+      ${catchBtn ? `<button data-action="catch" class="px-3 py-1 rounded bg-emerald-600 text-white">Catch’em!</button>` : ''}
       ${favoriteBtn ? `<button data-action="favorite" class="px-3 py-1 rounded border border-rose-300 text-rose-600 hover:bg-rose-50" title="Add to favorites" aria-label="Add to favorites">❤ Favorite</button>` : ''}
     </div>
     ${
