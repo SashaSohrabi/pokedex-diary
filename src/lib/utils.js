@@ -1,3 +1,5 @@
+import { getFromLocalStorage, POKEMONS_CACHE_KEY } from '../lib';
+
 export function toCardData(pokemon) {
   const {
     id,
@@ -24,4 +26,24 @@ export function toCardData(pokemon) {
     types: types.map((t) => t?.type?.name).filter(Boolean),
     stats: stats.map((s) => ({ name: s?.stat?.name, value: s?.base_stat })),
   };
+}
+
+// Searchbar
+// check and return Pokemon or No Result message from local storage
+export function searchPokemon(searchTerm) {
+  const cachedPokemonAll = getFromLocalStorage(POKEMONS_CACHE_KEY);
+
+  for (let i = 0; i < cachedPokemonAll.length; i++) {
+    if (cachedPokemonAll[i]['id'] == searchTerm) {
+      return cachedPokemonAll[i];
+    }
+  }
+
+  for (let i = 0; i < cachedPokemonAll.length; i++) {
+    if (cachedPokemonAll[i]['name'] == searchTerm) {
+      return cachedPokemonAll[i];
+    }
+  }
+
+  return `No result for: ${searchTerm}`;
 }
