@@ -87,3 +87,9 @@ dialogEl.addEventListener('close', function (event) {
   searchInputEl.value = '';
   searchInputEl.focus();
 });
+
+dialogEl.addEventListener('click', function (event) {
+  if (event.target.id === dialogEl.id) {
+    dialogEl.close();
+  }
+});
