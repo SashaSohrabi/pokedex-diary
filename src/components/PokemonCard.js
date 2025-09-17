@@ -1,6 +1,6 @@
 const PokemonCard = (
   p,
-  { catchBtn = false, favoriteBtn = false, removeBtn = false, note = null } = {}
+  { catchBtn = false, favoriteBtn = false, note = null } = {}
 ) => `
   <div class="card border rounded-xl p-3" data-id="${p.id}">
     <img src="${p.image}" alt="${p.name}" class="w-40 h-40 object-contain mx-auto mb-2">
@@ -9,7 +9,6 @@ const PokemonCard = (
     <div class="flex gap-2 flex-wrap">
       ${catchBtn ? `<button data-action="catch" class="px-3 py-1 rounded bg-emerald-600 text-white">Catch</button>` : ''}
       ${favoriteBtn ? `<button data-action="favorite" class="px-3 py-1 rounded border border-rose-300 text-rose-600 hover:bg-rose-50" title="Add to favorites" aria-label="Add to favorites">❤ Favorite</button>` : ''}
-      ${removeBtn ? `<button data-action="remove" class="px-3 py-1 rounded bg-rose-600 text-white">Remove</button>` : ''}
     </div>
     ${
       note !== null
