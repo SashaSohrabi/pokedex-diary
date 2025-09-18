@@ -10,6 +10,8 @@ import {
   POKEMONS_CACHE_KEY,
   FAVORITES_KEY,
   searchPokemon,
+  renderNotes,
+  NOTE_KEY,
 } from '../lib';
 import PokemonCard from '../components/PokemonCard.js';
 
@@ -53,6 +55,7 @@ dialogEl.classList.add(
 // Search Button Click Event
 searchButtonEl.addEventListener('click', (event) => {
   event.preventDefault();
+  // console.log(event.target.closest('[data-id]'));
   let searchRes = searchPokemon(searchInputEl.value.toLowerCase());
 
   const latestFavorites = getFromLocalStorage(FAVORITES_KEY);
@@ -60,7 +63,15 @@ searchButtonEl.addEventListener('click', (event) => {
 
   pokedexContainerEl.appendChild(dialogEl);
   if (searchInputEl.value !== '' && typeof searchRes == 'object') {
-    renderUI('#search-dialog', PokemonCard(searchRes, { ...cardOptions, favorite: isFavorite }),  'append');
+    const pokeCard = PokemonCard(searchRes, {
+      ...cardOptions,
+      favorite: isFavorite,
+      note: renderNotes(searchRes),
+    });
+
+    const id = Number(pokeCard?.dataset?.id);
+    renderUI('#search-dialog', pokeCard, 'append');
+    // console.log(pokeCard);
   } else {
     const noRes = document.createElement('p');
     noRes.textContent = `No Result for: ${searchInputEl.value}`;
@@ -87,7 +98,21 @@ dialogEl.addEventListener('close', function (event) {
 });
 
 dialogEl.addEventListener('click', function (event) {
+  event.preventDefault();
   if (event.target.id === dialogEl.id) {
     dialogEl.close();
+  } else {
+    const noteArray = getFromLocalStorage(NOTE_KEY);
+    const noteEl = document.getElementById('noteTextArea');
+    const saveNoteButtonEl = document.getElementById('saveNoteButton');
+    if (event.target === saveNoteButtonEl) {
+      console.log(event.target);
+
+      noteArray.push({ id: dialogEl.pokeCard.p.id, note: noteEl.value });
+      console.log(noteArray);
+
+      saveToLocalStorage(NOTE_KEY, noteArray);
+      dialogEl.close();
+    }
   }
 });
