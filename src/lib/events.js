@@ -1,4 +1,10 @@
-import { saveToLocalStorage, getFromLocalStorage, POKEMONS_CACHE_KEY, CAUGHT_KEY, FAVORITES_KEY } from './';
+import {
+  saveToLocalStorage,
+  getFromLocalStorage,
+  POKEMONS_CACHE_KEY,
+  CAUGHT_KEY,
+  FAVORITES_KEY,
+} from './';
 import Toastify from 'toastify-js';
 
 // Handlers for delegated actions
@@ -6,8 +12,9 @@ const onCatch = (id, card) => {
   const cardsData = getFromLocalStorage(POKEMONS_CACHE_KEY);
   const [caughtCard] = cardsData.filter((card) => card.id === id);
   const storedCaughtCards = getFromLocalStorage(CAUGHT_KEY);
-  const isAlreadyStored = storedCaughtCards.length && storedCaughtCards?.some((card) => card?.id === caughtCard.id);
-  
+  const isAlreadyStored =
+    storedCaughtCards.length && storedCaughtCards?.some((card) => card?.id === caughtCard.id);
+
   if (isAlreadyStored) {
     Toastify({
       text: `${caughtCard.name} is already in local storage`,
@@ -49,6 +56,21 @@ const onFavorite = (id, card) => {
     heart.setAttribute('aria-pressed', String(nowFav));
     heart.textContent = nowFav ? '❤️' : '🤍';
   }
+  // Dispatch custom event to notify other pages
+  window.dispatchEvent(
+    new CustomEvent('pokemonFavorited', {
+      detail: { id, isFavorite: !isFav },
+    })
+  );
+
+  // Also trigger storage event for cross-tab communication
+  window.dispatchEvent(
+    new StorageEvent('storage', {
+      key: FAVORITES_KEY,
+      newValue: JSON.stringify(next),
+      storageArea: localStorage,
+    })
+  );
 };
 
 export function attachRootEvents(root) {
