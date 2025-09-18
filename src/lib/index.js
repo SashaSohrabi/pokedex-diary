@@ -3,4 +3,5 @@ export { BASE_URL, FAVORITES_KEY, POKEMONS_CACHE_KEY, CAUGHT_KEY } from './const
 export { attachRootEvents, detachRootEvents } from './events.js';
 export { getFromLocalStorage, saveToLocalStorage } from './storage.js';
 export { toCardData } from './utils.js';
-export { renderUI } from './ui.js';
+export { renderUI, renderPokedexWithCurrentFavorites } from './ui.js';
+export { searchPokemon } from './utils.js';

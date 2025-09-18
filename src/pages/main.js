@@ -3,11 +3,13 @@ import {
   BASE_URL,
   toCardData,
   renderUI,
+  renderPokedexWithCurrentFavorites,
   attachRootEvents,
+  getFromLocalStorage,
   saveToLocalStorage,
   POKEMONS_CACHE_KEY,
-  getFromLocalStorage,
   FAVORITES_KEY,
+  searchPokemon,
 } from '../lib';
 import PokemonCard from '../components/PokemonCard.js';
 
@@ -26,10 +28,66 @@ attachRootEvents(root);
 const cardsData = pokemons.map(toCardData);
 saveToLocalStorage(POKEMONS_CACHE_KEY, cardsData);
 
-// Render cards into the container with favorite state
-const favorites = getFromLocalStorage(FAVORITES_KEY);
-const favSet = new Set(favorites.map((f) => f?.id));
-const cards = cardsData.map((p) =>
-  PokemonCard(p, { ...cardOptions, favorite: favSet.has(p.id) })
+// Initial render
+renderPokedexWithCurrentFavorites(cardOptions);
+
+// SearchBar Actions
+const searchButtonEl = document.getElementById('search-button');
+const pokedexContainerEl = document.getElementById('pokedex-container');
+const searchInputEl = document.getElementById('search-input');
+const dialogEl = document.createElement('dialog');
+dialogEl.id = 'search-dialog';
+dialogEl.classList.add(
+  'w-fit',
+  'h-fit',
+  'fixed',
+  'mx-auto',
+  'flex',
+  'mt-[100px]',
+  'bg-white',
+  'rounded-xl',
+  'border-black',
+  'border-1'
 );
-cards.forEach((card) => renderUI('#pokedex-container', card, { multiple }));
+
+// Search Button Click Event
+searchButtonEl.addEventListener('click', (event) => {
+  event.preventDefault();
+  let searchRes = searchPokemon(searchInputEl.value.toLowerCase());
+
+  const latestFavorites = getFromLocalStorage(FAVORITES_KEY);
+  const isFavorite = latestFavorites.some((f) => f && f.id === searchRes?.id);
+
+  pokedexContainerEl.appendChild(dialogEl);
+  if (searchInputEl.value !== '' && typeof searchRes == 'object') {
+    renderUI('#search-dialog', PokemonCard(searchRes, { ...cardOptions, favorite: isFavorite }),  'append');
+  } else {
+    const noRes = document.createElement('p');
+    noRes.textContent = `No Result for: ${searchInputEl.value}`;
+    noRes.classList.add('text-center', 'font-semibold', 'p-5');
+    dialogEl.appendChild(noRes);
+  }
+  dialogEl.showModal();
+});
+
+// Close Dialog on Keypress: Enter for Input
+searchInputEl.addEventListener('keypress', function (event) {
+  if (event.key === 'Enter') {
+    searchButtonEl.click();
+  }
+});
+
+// Remove all children from Dialog and remove Dialog from pokedexContainer on closing
+dialogEl.addEventListener('close', function (event) {
+  dialogEl.replaceChildren();
+  pokedexContainerEl.removeChild(dialogEl);
+  searchInputEl.value = '';
+  renderPokedexWithCurrentFavorites(cardOptions);
+  searchInputEl.focus();
+});
+
+dialogEl.addEventListener('click', function (event) {
+  if (event.target.id === dialogEl.id) {
+    dialogEl.close();
+  }
+});

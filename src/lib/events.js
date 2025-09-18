@@ -47,8 +47,6 @@ const onFavorite = (id, card) => {
   if (heart) {
     const nowFav = !isFav;
     heart.setAttribute('aria-pressed', String(nowFav));
-    // heart.classList.toggle('text-rose-600', nowFav);
-    // heart.classList.toggle('text-rose-300', !nowFav);
     heart.textContent = nowFav ? '❤️' : '🤍';
   }
 };
