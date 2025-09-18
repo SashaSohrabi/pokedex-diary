@@ -1,4 +1,4 @@
-import { getFromLocalStorage, POKEMONS_CACHE_KEY } from './lib';
+import { getFromLocalStorage, POKEMONS_CACHE_KEY } from '../lib';
 
 export function toCardData(pokemon) {
   const {
