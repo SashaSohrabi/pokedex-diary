@@ -7,7 +7,7 @@ const PokemonCard = (
     note = null,
   } = {}
 ) => `
-  <div class="card border rounded-xl p-3" data-id="${p.id}">
+  <article class="card border rounded-xl p-3" data-id="${p.id}">
     <img src="${p.image}" alt="${p.name}" class="w-40 h-40 object-contain mx-auto mb-2">
     <h3 class="capitalize font-semibold mb-1">${p.name}</h3>
     ${p.types?.length ? `<p class="text-sm text-gray-600 mb-2">Types: ${p.types.join(', ')}</p>` : ''}
@@ -26,7 +26,7 @@ const PokemonCard = (
       </div>`
         : ''
     }
-  </div>
+  </article>
 `;
 
 export default PokemonCard;

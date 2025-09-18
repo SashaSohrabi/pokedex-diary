@@ -3,6 +3,7 @@ import {
   BASE_URL,
   toCardData,
   renderUI,
+  renderPokedexWithCurrentFavorites,
   attachRootEvents,
   getFromLocalStorage,
   saveToLocalStorage,
@@ -27,11 +28,8 @@ attachRootEvents(root);
 const cardsData = pokemons.map(toCardData);
 saveToLocalStorage(POKEMONS_CACHE_KEY, cardsData);
 
-// Render cards into the container with favorite state
-const favorites = getFromLocalStorage(FAVORITES_KEY);
-const favSet = new Set(favorites.map((f) => f?.id));
-const cards = cardsData.map((p) => PokemonCard(p, { ...cardOptions, favorite: favSet.has(p.id) }));
-cards.forEach((card) => renderUI('#pokedex-container', card, { multiple }));
+// Initial render
+renderPokedexWithCurrentFavorites(cardOptions);
 
 // SearchBar Actions
 const searchButtonEl = document.getElementById('search-button');
@@ -56,18 +54,14 @@ dialogEl.classList.add(
 searchButtonEl.addEventListener('click', (event) => {
   event.preventDefault();
   let searchRes = searchPokemon(searchInputEl.value.toLowerCase());
-  let cachedPokemon = getFromLocalStorage(POKEMONS_CACHE_KEY);
-  console.log('Main SearchRes:');
-  console.log(searchRes);
-  console.log(typeof searchRes);
-  console.log(cachedPokemon);
+
+  const latestFavorites = getFromLocalStorage(FAVORITES_KEY);
+  const isFavorite = latestFavorites.some((f) => f && f.id === searchRes?.id);
 
   pokedexContainerEl.appendChild(dialogEl);
   if (searchInputEl.value !== '' && typeof searchRes == 'object') {
-    renderUI('#search-dialog', PokemonCard(searchRes, { ...cardOptions }), 'append');
+    renderUI('#search-dialog', PokemonCard(searchRes, { ...cardOptions, favorite: isFavorite }),  'append');
   } else {
-    console.log('hello from noRes!');
-
     const noRes = document.createElement('p');
     noRes.textContent = `No Result for: ${searchInputEl.value}`;
     noRes.classList.add('text-center', 'font-semibold', 'p-5');
@@ -88,6 +82,7 @@ dialogEl.addEventListener('close', function (event) {
   dialogEl.replaceChildren();
   pokedexContainerEl.removeChild(dialogEl);
   searchInputEl.value = '';
+  renderPokedexWithCurrentFavorites(cardOptions);
   searchInputEl.focus();
 });
 

@@ -1,3 +1,6 @@
+import { getFromLocalStorage, POKEMONS_CACHE_KEY, FAVORITES_KEY } from './';
+import PokemonCard from '../components/PokemonCard.js';
+
 /**
  * Render HTML or Nodes into a target element.
  * Simpler API with a single mode:
@@ -69,4 +72,14 @@ function toFragment(content) {
     }
   }
   return frag;
+}
+
+// Helper: render the pokedex list using current favorites state
+export function renderPokedexWithCurrentFavorites(cardOptions) {
+  const all = getFromLocalStorage(POKEMONS_CACHE_KEY);
+  const favs = getFromLocalStorage(FAVORITES_KEY);
+  const favSet = new Set(favs.map((f) => f?.id));
+  const cards = all.map((p) => PokemonCard(p, { ...cardOptions, favorite: favSet.has(p.id) }));
+
+  renderUI('#pokedex-container', cards, 'set');
 }
