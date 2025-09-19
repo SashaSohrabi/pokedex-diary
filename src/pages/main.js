@@ -55,9 +55,8 @@ dialogEl.classList.add(
 // Search Button Click Event
 searchButtonEl.addEventListener('click', (event) => {
   event.preventDefault();
-  // console.log(event.target.closest('[data-id]'));
   let searchRes = searchPokemon(searchInputEl.value.toLowerCase());
-
+  const noteArray = getFromLocalStorage(NOTE_KEY) ?? [];
   const latestFavorites = getFromLocalStorage(FAVORITES_KEY);
   const isFavorite = latestFavorites.some((f) => f && f.id === searchRes?.id);
 
@@ -69,9 +68,16 @@ searchButtonEl.addEventListener('click', (event) => {
       note: renderNotes(searchRes),
     });
 
-    const id = Number(pokeCard?.dataset?.id);
     renderUI('#search-dialog', pokeCard, 'append');
-    // console.log(pokeCard);
+
+    const noteEl = document.getElementById('noteTextArea');
+
+    for (let i = 0; i < noteArray.length; i++) {
+      if (noteArray[i].id == searchRes.id) {
+        // let note = noteArray.find((pokeNote) => pokeNote.id == searchRes.id);
+        noteEl.value = noteArray[i].note;
+      }
+    }
   } else {
     const noRes = document.createElement('p');
     noRes.textContent = `No Result for: ${searchInputEl.value}`;
@@ -99,18 +105,24 @@ dialogEl.addEventListener('close', function (event) {
 
 dialogEl.addEventListener('click', function (event) {
   event.preventDefault();
+
+  const noteArray = getFromLocalStorage(NOTE_KEY) ?? [];
+  const noteEl = document.getElementById('noteTextArea');
+  const saveNoteButtonEl = document.getElementById('saveNoteButton');
   if (event.target.id === dialogEl.id) {
     dialogEl.close();
+    return;
   } else {
-    const noteArray = getFromLocalStorage(NOTE_KEY);
-    const noteEl = document.getElementById('noteTextArea');
-    const saveNoteButtonEl = document.getElementById('saveNoteButton');
+    const pokeID = dialogEl.querySelector('article').dataset.id;
+    let newNote = { id: pokeID, note: noteEl.value.trim() };
     if (event.target === saveNoteButtonEl) {
-      console.log(event.target);
-
-      noteArray.push({ id: dialogEl.pokeCard.p.id, note: noteEl.value });
-      console.log(noteArray);
-
+      for (let i = 0; i < noteArray.length; i++) {
+        if (noteArray[i].id == pokeID) {
+          noteArray.splice(i, 1);
+          break;
+        }
+      }
+      noteArray.push(newNote);
       saveToLocalStorage(NOTE_KEY, noteArray);
       dialogEl.close();
     }

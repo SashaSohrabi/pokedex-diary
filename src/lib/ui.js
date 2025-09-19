@@ -87,20 +87,9 @@ export function renderPokedexWithCurrentFavorites(cardOptions) {
 // Render Notes on Pokemon Cards
 export function renderNotes(pokemon) {
   let note = '';
-  // const all = getFromLocalStorage(POKEMONS_CACHE_KEY);
-  // const favs = getFromLocalStorage(FAVORITES_KEY);
   const notes = getFromLocalStorage(NOTE_KEY);
-
-  // const noteEl = document.createElement('textarea');
-  if (notes.some((poke) => poke.id == pokemon.id)) {
-    //   noteEl.textContent = poke.note;
-    // } else {
-    //   noteEl.textContent = '';
-    //   noteEl.placeholder = 'Enter a note for this Pokemon';
-    // }
+  if (notes.some((poke) => poke.id === pokemon.id)) {
     note = poke.note;
   }
   return note;
-  // const saveButtonEl = document.createElement('button');
-  // saveButtonEl.textContent = 'Save Note';
 }
