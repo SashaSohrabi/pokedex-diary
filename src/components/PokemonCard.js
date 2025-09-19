@@ -2,10 +2,10 @@ const PokemonCard = (
   p,
   { catchBtn = false, favoriteBtn = false, favorite = false, note = null } = {}
 ) => `
-  <article class="card border rounded-xl p-3" data-id="${p.id}">
+  <article  class="card border rounded-xl p-3" data-id="${p.id}">
     <img src="${p.image}" alt="${p.name}" class="w-40 h-40 object-contain mx-auto mb-2">
     <h3 class="capitalize font-semibold mb-1">${p.name}</h3>
-    ${p.types?.length ? `<p class="text-sm text-gray-600 mb-2">Types: ${p.types.join(', ')}</p>` : ''}
+    ${p.types?.length ? `<p class="text-sm font-bold text-gray-600 mb-2">Types: ${p.types.join(', ')}</p>` : ''}
     <div class"flex flex-col flex-wrap items-center>
     <div class="mb-1 text-base font-medium text-green-700 dark:text-green-700">HP ${p.stats[0].value}</div>
   <div class="bg-green-600 h-2.5 rounded-full dark:bg-green-500" style="width: ${p.stats[0].value / 2.2}%"></div>
@@ -36,8 +36,8 @@ const PokemonCard = (
       note !== null
         ? `
       <div class="mt-3">
-        <label class="text-xs text-gray-600">Note</label>
-        <textarea rows="2" id="noteTextArea" data-note class="w-full border rounded p-2 text-sm">${note}</textarea>
+        <label class="text-xs text-gray-600 font-semibold">Note</label>
+        <textarea rows="2" id="noteTextArea" data-note class="w-full bg-white border rounded p-2 text-sm">${note}</textarea>
         <button id="saveNoteButton" type="button" class="px-3 py-1 my-2 cursor-pointer rounded bg-emerald-600 text-white">Save Note</button>
       </div>`
         : ''

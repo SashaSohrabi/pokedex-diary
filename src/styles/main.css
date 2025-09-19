@@ -17,6 +17,13 @@
   z-index: 11;
 }
 
+body {
+  background-image: url('/poke-bg.jpg');
+  box-shadow: inset 0 0 0 2000px rgba(255, 255, 255, 0.75);
+}
+.card {
+  background-color: lightblue;
+}
 ::backdrop {
   background-image: linear-gradient(45deg, magenta, rebeccapurple, dodgerblue, green);
   opacity: 0.75;
@@ -45,12 +52,12 @@
   #app-navbar .flex-1 {
     display: none;
   }
-  
+
   #app-navbar nav a {
     padding: 0.5rem 0.75rem;
     font-size: 0.875rem;
   }
-  
+
   #app-navbar .text-lg {
     font-size: 1rem;
   }
@@ -60,12 +67,12 @@
   #app-navbar nav {
     gap: 0.25rem;
   }
-  
+
   #app-navbar nav a {
     padding: 0.5rem;
     font-size: 0.75rem;
   }
-  
+
   #app-navbar .text-lg {
     font-size: 0.875rem;
   }
