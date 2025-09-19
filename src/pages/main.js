@@ -74,7 +74,6 @@ searchButtonEl.addEventListener('click', (event) => {
 
     for (let i = 0; i < noteArray.length; i++) {
       if (noteArray[i].id == searchRes.id) {
-        // let note = noteArray.find((pokeNote) => pokeNote.id == searchRes.id);
         noteEl.value = noteArray[i].note;
       }
     }
