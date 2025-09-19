@@ -56,6 +56,21 @@ const onFavorite = (id, card) => {
     heart.setAttribute('aria-pressed', String(nowFav));
     heart.textContent = nowFav ? '❤️' : '🤍';
   }
+  // Dispatch custom event to notify other pages
+  window.dispatchEvent(
+    new CustomEvent('pokemonFavorited', {
+      detail: { id, isFavorite: !isFav },
+    })
+  );
+
+  // Also trigger storage event for cross-tab communication
+  window.dispatchEvent(
+    new StorageEvent('storage', {
+      key: FAVORITES_KEY,
+      newValue: JSON.stringify(next),
+      storageArea: localStorage,
+    })
+  );
 };
 
 export function attachRootEvents(root) {
