@@ -1,4 +1,4 @@
-import { getFromLocalStorage, POKEMONS_CACHE_KEY, FAVORITES_KEY } from './';
+import { getFromLocalStorage, POKEMONS_CACHE_KEY, FAVORITES_KEY, NOTE_KEY } from './';
 import PokemonCard from '../components/PokemonCard.js';
 
 /**
@@ -82,4 +82,14 @@ export function renderPokedexWithCurrentFavorites(cardOptions) {
   const cards = all.map((p) => PokemonCard(p, { ...cardOptions, favorite: favSet.has(p.id) }));
 
   renderUI('#pokedex-container', cards, 'set');
+}
+
+// Render Notes on Pokemon Cards
+export function renderNotes(pokemon) {
+  let note = '';
+  const notes = getFromLocalStorage(NOTE_KEY);
+  if (notes.some((poke) => poke.id === pokemon.id)) {
+    note = poke.note;
+  }
+  return note;
 }

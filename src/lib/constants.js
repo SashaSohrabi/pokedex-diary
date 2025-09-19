@@ -4,5 +4,6 @@ const BASE_URL = 'https://pokeapi.co/api/v2';
 const FAVORITES_KEY = 'pokedex:favorites';
 const POKEMONS_CACHE_KEY = 'pokedex:all';
 const CAUGHT_KEY = 'pokedex:caught';
+const NOTE_KEY = 'pokedex:note';
 
-export { BASE_URL, FAVORITES_KEY, POKEMONS_CACHE_KEY, CAUGHT_KEY };
+export { BASE_URL, FAVORITES_KEY, POKEMONS_CACHE_KEY, CAUGHT_KEY, NOTE_KEY };
