@@ -40,3 +40,52 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+/* Responsive Navigation Styles */
+@media (max-width: 640px) {
+  #app-navbar .flex-1 {
+    display: none;
+  }
+  
+  #app-navbar nav a {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
+  
+  #app-navbar .text-lg {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #app-navbar nav {
+    gap: 0.25rem;
+  }
+  
+  #app-navbar nav a {
+    padding: 0.5rem;
+    font-size: 0.75rem;
+  }
+  
+  #app-navbar .text-lg {
+    font-size: 0.875rem;
+  }
+}
+
+/* Enhanced mobile-first responsive design */
+.search-bar {
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .search-bar {
+    min-width: 300px;
+  }
+}
+
+/* Improved button spacing on mobile */
+@media (max-width: 640px) {
+  #search-button {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}

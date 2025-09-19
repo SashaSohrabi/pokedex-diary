@@ -10,58 +10,57 @@
   </head>
   <body class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 text-slate-900">
     <header id="app-navbar" class="sticky top-0 z-50 navbar-glass shadow-lg">
-      <div class="max-w-6xl mx-auto flex items-center justify-between p-4">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center justify-between h-16">
         <!-- 1. Left Section: Logo and Title -->
-        <div class="flex items-center space-x-3">
+        <div class="flex items-center space-x-3 flex-shrink-0">
           <div class="w-8 h-8 bg-gradient-pokemon rounded-full flex items-center justify-center">
-            <img src="/public/pokmon-logo.png" alt="Pokeball" class="w-auto" />
+            <img src="/public/pokmon-logo.png" alt="Pokeball" class="w-6 h-6" />
           </div>
           <a
             href="/"
             class="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
           >
-            Pokédex Diary
+            Pokédex 
           </a>
         </div>
 
         <!-- 2. Center Section: Search Bar -->
-        <div class="flex-grow flex justify-center px-4">
-          <div id="searchBar" class="search-bar flex items-center gap-1 w-full max-w-xs">
+        <div class="flex-1 flex justify-center px-4 lg:px-8">
+          <div id="searchBar" class="search-bar flex items-center gap-2 w-full max-w-md">
             <input
               type="text"
               name=""
               id="search-input"
-              class="w-full px-2 py-1 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              class="flex-1 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent0"
               placeholder="Pokemon Name or ID..."
               autocomplete="off"
             />
             <button
               id="search-button"
-              class="flex items-center justify-center bg-transparent h-[30px] w-[30px] p-1 rounded-sm hover:cursor-pointer hover:bg-gray-200"
+              class="flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white h-10 w-10 rounded-lg transition-colors duration-200"
             >
-              <img
-                class="h-full w-full"
-                src="https://upload.wikimedia.org/wikipedia/commons/5/55/Magnifying_glass_icon.svg"
-                alt="Search"
-              />
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
             </button>
           </div>
         </div>
 
         <!-- 3. Right Section: Navigation Links -->
-        <nav class="flex items-center space-x-4">
+        <nav class="flex items-center space-x-2 flex-shrink-0">
           <a
             href="/"
-            class="relative px-3 py-2 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg transition-all hover:bg-blue-100"
+            class="relative px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg transition-all hover:bg-blue-100 whitespace-nowrap"
           >
-            <span>🏠 Home</span>
-          </a>
+            <span class="hidden sm:inline">🏠 </span>Home
+        </a>
           <a
             href="/pokedex.html"
-            class="relative px-3 py-2 text-sm font-medium text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
+            class="relative px-4 py-2 text-sm font-medium text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all whitespace-nowrap"
           >
-            <span>📱 Pokédex</span>
-          </a>
+            <span class="hidden sm:inline">📱 </span>Pokédx
+        </a>
         </nav>
       </div>
     </header>
