@@ -11,9 +11,10 @@
   <body class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 text-slate-900">
     <header id="app-navbar" class="sticky top-0 z-50 navbar-glass shadow-lg">
       <div class="max-w-6xl mx-auto flex items-center justify-between p-4">
+        <!-- 1. Left Section: Logo and Title -->
         <div class="flex items-center space-x-3">
           <div class="w-8 h-8 bg-gradient-pokemon rounded-full flex items-center justify-center">
-            <span class="text-white font-bold text-sm">⚡</span>
+            <img src="/public/pokmon-logo.png" alt="Pokeball" class="w-auto" />
           </div>
           <a
             href="/"
@@ -22,7 +23,33 @@
             Pokédex Diary
           </a>
         </div>
-        <nav class="flex items-center space-x-6">
+
+        <!-- 2. Center Section: Search Bar -->
+        <div class="flex-grow flex justify-center px-4">
+          <div id="searchBar" class="search-bar flex items-center gap-1 w-full max-w-xs">
+            <input
+              type="text"
+              name=""
+              id="search-input"
+              class="w-full px-2 py-1 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Pokemon Name or ID..."
+              autocomplete="off"
+            />
+            <button
+              id="search-button"
+              class="flex items-center justify-center bg-transparent h-[30px] w-[30px] p-1 rounded-sm hover:cursor-pointer hover:bg-gray-200"
+            >
+              <img
+                class="h-full w-full"
+                src="https://upload.wikimedia.org/wikipedia/commons/5/55/Magnifying_glass_icon.svg"
+                alt="Search"
+              />
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. Right Section: Navigation Links -->
+        <nav class="flex items-center space-x-4">
           <a
             href="/"
             class="relative px-3 py-2 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg transition-all hover:bg-blue-100"
@@ -33,7 +60,7 @@
             href="/pokedex.html"
             class="relative px-3 py-2 text-sm font-medium text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
           >
-            <span>📱 Pokédx</span>
+            <span>📱 Pokédex</span>
           </a>
         </nav>
       </div>
