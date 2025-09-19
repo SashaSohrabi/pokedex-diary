@@ -47,52 +47,131 @@ body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Responsive Navigation Styles */
-@media (max-width: 640px) {
-  #app-navbar .flex-1 {
-    display: none;
+/* Responsive Navigation Styles - Keep everything in one line */
+#app-navbar {
+  min-height: 4rem; /* Ensure minimum height */
+}
+
+#app-navbar .flex {
+  flex-wrap: nowrap !important; /* Prevent wrapping */
+}
+
+/* Force elements to stay in line */
+#app-navbar .flex-shrink-0 {
+  flex-shrink: 0 !important;
+}
+
+#app-navbar .flex-1 {
+  flex: 1 1 0% !important;
+  min-width: 0 !important; /* Allow shrinking */
+}
+
+/* Search bar responsive sizing */
+.search-bar {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Tablet and small desktop */
+@media (max-width: 768px) {
+  #app-navbar .search-bar {
+    max-width: 200px;
   }
 
+  #app-navbar .flex-1 {
+    padding: 0 0.5rem;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 640px) {
+  /* Smaller search bar */
+  #app-navbar .search-bar {
+    max-width: 140px;
+  }
+
+  #app-navbar .flex-1 {
+    padding: 0 0.25rem;
+  }
+
+feature/new-feature
+  /* Smaller navigation buttons */
   #app-navbar nav a {
-    padding: 0.5rem 0.75rem;
+    padding: 0.375rem 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  /* Smaller title */
+  #app-navbar .text-xl {
     font-size: 0.875rem;
   }
 
+feature/new-feature
+  /* Hide emoji icons on small screens */
+  #app-navbar nav a span {
+    display: none;
+    
   #app-navbar .text-lg {
     font-size: 1rem;
   }
 }
 
+/* Very small phones */
 @media (max-width: 480px) {
-  #app-navbar nav {
-    gap: 0.25rem;
+  /* Even smaller search bar */
+  #app-navbar .search-bar {
+    max-width: 100px;
   }
 
-  #app-navbar nav a {
-    padding: 0.5rem;
+  /* Smaller search input */
+  #app-navbar .search-bar input {
     font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
   }
+
+  /* Smaller search button */
+  #app-navbar .search-bar button {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  /* Minimal navigation spacing */
+  #app-navbar nav {
+    gap: 0.125rem;
+  }
+
+ feature/new-feature
+  /* Minimal button padding */
+
+  #app-navbar nav a {
+    padding: 0.25rem 0.375rem;
+    font-size: 0.625rem;
+  }
+ feature/new-feature
+  /* Smaller title */
+  #app-navbar .text-xl {
 
   #app-navbar .text-lg {
     font-size: 0.875rem;
+
   }
 }
 
-/* Enhanced mobile-first responsive design */
-.search-bar {
-  min-width: 0;
-}
+/* Extra small screens - emergency fallback */
+@media (max-width: 360px) {
+  #app-navbar .search-bar {
+    max-width: 80px;
+  }
 
-@media (min-width: 768px) {
-  .search-bar {
-    min-width: 300px;
+  #app-navbar nav a {
+    padding: 0.125rem 0.25rem;
+    font-size: 0.5rem;
   }
 }
 
-/* Improved button spacing on mobile */
-@media (max-width: 640px) {
-  #search-button {
-    width: 2.5rem;
-    height: 2.5rem;
+/* Ensure no wrapping at any screen size */
+@media (max-width: 320px) {
+  #app-navbar .flex-1 {
+    display: none !important; /* Hide search on very small screens */
   }
 }
